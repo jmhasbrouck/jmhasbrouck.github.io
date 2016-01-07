@@ -1,0 +1,29 @@
+.jumbotron
+{
+    background-color:coral;
+    color:black;
+}
+.page-header
+{
+    font-size: 50px;
+}
+.jumbotron img
+{
+    width:240px;
+    height:270px;
+    border-radius: 100%;
+}
+.panel-body p{
+    font-size:16px;
+}
+.panel-default{
+    border-width:thin;
+    border-color:coral;
+    
+}
+h2{
+    color:coral;
+}
+h3{
+    color:coral;
+}
