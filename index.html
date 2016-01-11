@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <head>
   <title>Index</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index_stylesheet.css"/>
 </head>
 
 <body>
-    <a href="https://www.youtube.com/watch?v=OXO2azb3_PE" target = "_blank"><img src="https://s-media-cache-ak0.pinimg.com/236x/1d/6e/b6/1d6eb6d7f151ae0cab563949b5e7c53e.jpg" alt="Broscience" /></a>
-  <p>Hello! Welcome to the index of James Hasbrouck's GitHub</p>
-    <hr>
-  <p>Here are some links:</p>
-    <li><a href="https://www.linkedin.com/in/jmhasbrouck" target="_blank">LinkedIn </li>
-    <li><a href="https://www.facebook.com/james.hasbrouck" target="_blank">Facebook </li>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/10896921_10203449729264549_4946665204217589632_n.jpg"           alt="Swim" id="my_headshot"/>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <h1>James Hasbrouck</h1>
+                <hr>
+                <p>Student, Swimmer, Musician, Programmer</p>
+            </div>
+        <div class="col-sm-3">
+                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/12314637_1143648788998256_9217833439002951231_o.jpg"           alt="Swim" id="swim"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="nav nav-tabs nav-justified" id="pills">
+          <li class="active"><a data-toggle="pill" href="#student">Student</a></li>
+          <li><a data-toggle="pill" href="#swimmer">Swimmer</a></li>
+          <li><a data-toggle="pill" href="#musician">Musician</a></li>
+          <li><a data-toggle="pill" href="#coder">Programmer</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="student" class="tab-pane fade in active">
+              <a href="www.carthage.edu" target = "_blank"><h1>CARTHAGE</h1></a>
+          </div>
+          <div id="swimmer" class="tab-pane fade">
+            <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><h1>CARTHAGE SWIMMING</h1></a>
+          </div>
+          <div id="musician" class="tab-pane fade">
+            <a href="https://www.youtube.com/watch?v=x6kN91R37WQ" target = "_blank"><h1>GUITAR</h1></a>
+          </div>
+          <div id="coder" class="tab-pane fade">
+              <a href="https://github.com/jmhasbrouck" target = "_blank"><h1>GITHUB</h1></a>
+          </div>
+        </div>
+    </div>
 </body>
