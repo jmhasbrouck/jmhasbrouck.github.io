@@ -1,16 +1,37 @@
 //get the buttons
 var submitButton = document.querySelector("#submitButton");
 var clearButton = document.querySelector("#clearButton");
-
+var scheduleButton;
+var principal=0;
+var initial_principal=0;
+var monthly=0;
+var months=0;
+var this_month_payment = 0;
+var starting_month = 0;
+var ending_month = 0;
+var date = new Date();
+var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    
 //link the 'click' event on the button to the 'clear' function
 clearButton.addEventListener("click", clear, false);
 
 //link the 'click' event on the button to the 'display' function
 submitButton.addEventListener("click", display, false);
 
-var thisMonthsPayment = function(principal, total_month, current_month, monthly_rate){
-    number_of_months = total_month-current_month;
-    return ((monthly_rate/(1 - Math.pow((1 + monthly_rate),-number_of_months)))*principal);
+var thisMonthsPayment = function(principal, total_months, monthly_rate){
+    return ((monthly_rate/(1 - Math.pow((1 + monthly_rate),-total_months)))*principal);
 }
 
 //function to clear out the output div
@@ -31,36 +52,77 @@ var stripNumberString = function(input){
     }
     return s;
 }
-
+var parseMonths = function(){
+    starting_month = document.querySelector("#starting_month").value;
+    if(starting_month == ""){alert("Starting month is empty"); return false;    }
+    var starting_year = starting_month.split('-');
+    var temp_s_month = starting_year[1];
+    starting_year = starting_year[0];
+    temp_s_month = Number(temp_s_month - 1);
+    starting_year = Number(starting_year);
+    var total_s_months = starting_year * 12 + temp_s_month;
+    
+    ending_month = document.querySelector("#ending_month").value;
+    if(ending_month == ""){alert("Ending month is empty"); return false;    }
+    var ending_year = ending_month.split('-');
+    temp_s_month = ending_year[1];
+    ending_year = ending_year[0];
+    temp_s_month = Number(temp_s_month - 1);
+    ending_year = Number(ending_year);
+    var total_e_months = ending_year*12 + temp_s_month;
+    var current_months = (date.getMonth() + date.getFullYear() * 12);
+    starting_month = total_s_months - current_months;
+    ending_month = total_e_months - current_months;
+    if (starting_month > ending_month){
+        alert("You seem to have entered a starting date that is after the ending date.")
+        return false;
+    }
+    return true;
+}
+function createScheduleTable(event){
+    var output= "<div class=\"container\"><h2>Sample</h2><table class=\"table table-bordered\"><thead><tr><th>Month</th><th>Monthly Principal Paid</th><th>Monthly Interest Paid</th><th>Amount Paid</th><th>Principal Remaining</th><th>Amount Paid / Principal</th></tr></thead><tbody>";
+    if(!parseMonths()){
+        return;
+    }
+    var amt_paid = 0;
+    var array = [];
+    var this_month = 0;
+    var this_interest = 0;
+    var this_principal = 0;
+    for (i = 0; i < months; i++){
+        this_month = parseFloat(Math.round(thisMonthsPayment(principal, months, monthly))).toFixed(2);
+        this_interest = principal * monthly;
+        amt_paid = this_month + this_interest + amt_paid;
+        this_principal = this_month - this_interest;
+        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + this_principal + "</td><td>$" +      parseFloat(Math.round(this_month)).toFixed(2)+ "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");   
+    }
+    for(i = starting_month; i < ending_month; i++){
+        output = output + array[i];
+    }
+    output = output + "</tbody></table></div>";
+    document.querySelector("#outputDiv3").innerHTML = output;
+}
+function createScheduleRange(){
+    
+    var years_from_now = new Date(date.getFullYear() + (months/12), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()); 
+    var output="<div class=\"container\"><h2>Scheduled payment table</h2><div class=\"row\"><div class=\"col-md-4\">Starting Month</div><div class=\"col-md-4\">Ending Month (" + month[years_from_now.getMonth()] + " " + years_from_now.getFullYear() + ")</div></div><div class=\"input-group\"><div class=\"row\"><div class=\"col-md-4\"><input type=\"month\" class=\"form-control\" id=\"starting_month\"/ min=\"" +date.getFullYear() +"-" + date.getMonth() + 1 + "\" max=\"" +years_from_now.getFullYear() +"-" + years_from_now.getMonth() + 1 + "\"/></div><div class=\"col-md-4\"><input type=\"month\" class=\"form-control\" id=\"ending_month\" min=\"" +date.getFullYear() +"-" + date.getMonth() + 1 + "\" max=\"" +years_from_now.getFullYear() +"-" + years_from_now.getMonth() + 1 + "\"/></div><div class=\"col-md-4\"><span class=\"input-group-btn\"><button type=\"button\" id=\"scheduleButton\" class=\"btn btn-default\">          <span class=\"glyphicon glyphicon-refresh\"></span>Create Schedule!</button></span></div></div></div></div>";
+    document.querySelector("#outputDiv2").innerHTML = output;
+    scheduleButton = document.querySelector("#scheduleButton");
+    scheduleButton.addEventListener("click", createScheduleTable, false);
+}
 //function to be called when the button is clicked 
 function display(event)
 {	
-    var output= "<div class=\"container\"><h2>Result</h2><table class=\"table table-bordered\"><thead><tr><th>Loan Amount</th><th>Interest Rate</th><th>Monthly Payment</th><th>Total Amount Paid</th><th>Total Amount of Interest Paid</th><th>Amount Paid / Principal</th></tr></thead><tbody>";
-    /*<tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>*/
-      
+    var output= "<div class=\"container\"><h2>Sample</h2><table class=\"table table-bordered\"><thead><tr><th>Loan Amount</th><th>Interest Rate</th><th>Monthly Payment</th><th>Total Amount Paid</th><th>Total Amount of Interest Paid</th><th>Amount Paid / Principal</th></tr></thead><tbody>";     
     
     //getting values and making sure theyre numbers-->
-    var principal = document.querySelector("#principal").value;
-    var initial_principal = principal;
+    principal = document.querySelector("#principal").value;
+    initial_principal = principal;
     if (typeof principal == "string"){
         principal = stripNumberString(principal);
         principal = Number(principal);
     }
-    var monthly = document.querySelector("#monthly_interest_rate").value;
-    var initial_monthly_percent;
+    monthly = document.querySelector("#monthly_interest_rate").value;
     if (typeof monthly == "string"){
         monthly = stripNumberString(monthly);
         initial_monthly_percent=monthly;
@@ -75,12 +137,12 @@ function display(event)
     //text and hidden value
     var yearName = yearDDL.options[yearIndex].text;
     var yearCode = yearDDL.options[yearIndex].value;
-    var months = 12*yearCode;
-    var this_month;
-    this_month = thisMonthsPayment(principal,months,0,monthly);
-    principal-=this_month;
-    output = output+ "<tr><td>" + initial_principal + "</td><td>%" + parseFloat(Math.round(initial_monthly_percent)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(this_month)).toFixed(2) + "</td><td>$" + 0 + "</td><td>$" + 0 + "</td><td>" + 0 + "</td></tr>";
+    months = 12*yearCode;
+    this_month_payment = thisMonthsPayment(principal,months,monthly);
+    //principal-=this_month;
+    output = output+ "<tr><td>" + initial_principal + "</td><td>%" + monthly*1200 + "</td><td>$" + parseFloat(Math.round(this_month_payment)).toFixed(2) + "</td><td>$" + 0 + "</td><td>$" + 0 + "</td><td>" + 0 + "</td></tr>";
     output = output + "</tbody></table></div>";
     //access the inner html of the div and place the result string in there
     document.querySelector("#outputDiv").innerHTML = output;
+    createScheduleRange();
 }
