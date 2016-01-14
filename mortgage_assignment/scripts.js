@@ -38,9 +38,12 @@ var thisMonthsPayment = function(principal, total_months, monthly_rate){
 function clear(e) {
     //get the output div
     var outputDiv = document.querySelector("#outputDiv");
-
+    var outputDiv2 = document.querySelector("#outputDiv2");
+    var outputDiv3 = document.querySelector("#outputDiv3");
     //clear out the entire contents of the div
     outputDiv.innerHTML = "";
+    outputDiv2.innerHTML = "";
+    outputDiv3.innerHTML = "";
 }
 
 var stripNumberString = function(input){
@@ -80,7 +83,7 @@ var parseMonths = function(){
     return true;
 }
 function createScheduleTable(event){
-    var output= "<div class=\"container\"><h2>Sample</h2><table class=\"table table-bordered\"><thead><tr><th>Month</th><th>Monthly Principal Paid</th><th>Monthly Interest Paid</th><th>Amount Paid</th><th>Principal Remaining</th><th>Amount Paid / Principal</th></tr></thead><tbody>";
+    var output= "<div class=\"container\"><table class=\"table table-bordered\"><thead><tr><th>Month</th><th>Monthly Principal Paid</th><th>Monthly Interest Paid</th><th>Amount Paid</th><th>Principal Remaining</th><th>Amount Paid / Principal</th></tr></thead><tbody><div class=\"container\">";
     if(!parseMonths()){
         return;
     }
@@ -89,17 +92,25 @@ function createScheduleTable(event){
     var this_month = 0;
     var this_interest = 0;
     var this_principal = 0;
+    var counter = 0;
     for (i = 0; i < months; i++){
-        this_month = parseFloat(Math.round(thisMonthsPayment(principal, months, monthly))).toFixed(2);
+        if (i%12 == 0){
+            array.push("<tr><td>" + "<h4>"+(date.getFullYear() + Math.floor(i/12))+"</h4>" + "</td></tr>");
+            counter++;
+            i--;
+        }
+        this_month = thisMonthsPayment(principal, months, monthly);
         this_interest = principal * monthly;
         amt_paid = this_month + this_interest + amt_paid;
         this_principal = this_month - this_interest;
-        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + this_principal + "</td><td>$" +      parseFloat(Math.round(this_month)).toFixed(2)+ "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");   
+        principal-=this_month;
+        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(Math.round(this_principal)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");
+        
     }
-    for(i = starting_month; i < ending_month; i++){
+    for(i = starting_month + 1; i < ending_month + counter; i++){
         output = output + array[i];
     }
-    output = output + "</tbody></table></div>";
+    output = output + "</div></tbody></table></div>";
     document.querySelector("#outputDiv3").innerHTML = output;
 }
 function createScheduleRange(){
