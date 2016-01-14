@@ -93,21 +93,22 @@ function createScheduleTable(event){
     var this_interest = 0;
     var this_principal = 0;
     var counter = 0;
-    for (i = 0; i < months; i++){
+    for (i = 0; i < months + months/12; i++){
         if (i%12 == 0){
             array.push("<tr><td>" + "<h4>"+(date.getFullYear() + Math.floor(i/12))+"</h4>" + "</td></tr>");
-            counter++;
-            i--;
         }
-        this_month = thisMonthsPayment(principal, months, monthly);
-        this_interest = principal * monthly;
-        amt_paid = this_month + this_interest + amt_paid;
-        this_principal = this_month - this_interest;
-        principal-=this_month;
-        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(Math.round(this_principal)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");
-        
+        else{
+            this_month = thisMonthsPayment(principal, months, monthly);
+            this_interest = principal * monthly;
+            amt_paid = this_month + this_interest + amt_paid;
+            this_principal = this_month - this_interest;
+            principal-=this_month;
+            array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(Math.round(this_principal)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");
+        }
     }
-    for(i = starting_month + 1; i < ending_month + counter; i++){
+    var years_in_between = Math.floor((ending_month-starting_month)/12);
+    var years_before = Math.floor((starting_month/12));
+    for(i = starting_month + years_before; i < ending_month + years_in_between; i++){
         output = output + array[i];
     }
     output = output + "</div></tbody></table></div>";
