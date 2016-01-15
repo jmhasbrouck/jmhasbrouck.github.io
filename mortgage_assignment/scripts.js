@@ -103,8 +103,8 @@ function createScheduleTable(event){
         this_interest = principal * monthly;
         amt_paid = this_month + amt_paid + this_interest;
         this_principal = this_month - this_interest;
-        principal-=this_month;
-        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(this_principal).toPrecision(2) + "</td><td>$" + parseFloat(this_interest).toPrecision(2) + "</td><td>$" + parseFloat(amt_paid).toPrecision(2) + "</td><td>$" + parseFloat(principal).toPrecision(2) + "</td><td>" + parseFloat(amt_paid/principal).toPrecision(4) + "</td></tr>");
+        principal=principal - (this_month + this_interest);
+        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(this_principal).toFixed(2) + "</td><td>$" + parseFloat(this_interest).toFixed(2) + "</td><td>$" + parseFloat(amt_paid).toFixed(2) + "</td><td>$" + parseFloat(principal).toFixed(2) + "</td><td>" + parseFloat(amt_paid/principal).toFixed(4) + "</td></tr>");
         
     }
     var years_in_between = (ending_month-starting_month)/12 + 1;
@@ -153,7 +153,7 @@ function display(event)
     months = 12*yearCode;
     this_month_payment = thisMonthsPayment(principal,months,monthly);
     //principal-=this_month;
-    output = output+ "<tr><td>" + parseFloat(initial_principal).toPrecision(2) + "</td><td>%" + monthly*1200 + "</td><td>$" + parseFloat(this_month_payment).toPrecision(2) + "</td><td>$" + 0.00 + "</td><td>$" + 0.00 + "</td><td>" + 0 + "</td></tr>";
+    output = output+ "<tr><td>$" + parseFloat(initial_principal).toFixed(2) + "</td><td>%" + monthly*1200 + "</td><td>$" + parseFloat(this_month_payment).toFixed(2) + "</td><td>$" + 0 + "</td><td>$" + 0 + "</td><td>" + 0 + "</td></tr>";
     output = output + "</tbody></table></div>";
     //access the inner html of the div and place the result string in there
     document.querySelector("#outputDiv").innerHTML = output;
