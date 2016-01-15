@@ -153,7 +153,7 @@ function display(event)
     months = 12*yearCode;
     this_month_payment = thisMonthsPayment(principal,months,monthly);
     //principal-=this_month;
-    output = output+ "<tr><td>" + initial_principal + "</td><td>%" + monthly*1200 + "</td><td>$" + parseFloat(Math.round(this_month_payment)).toFixed(2) + "</td><td>$" + 0 + "</td><td>$" + 0 + "</td><td>" + 0 + "</td></tr>";
+    output = output+ "<tr><td>" + parseFloat(initial_principal).toPrecision(2) + "</td><td>%" + monthly*1200 + "</td><td>$" + parseFloat(this_month_payment).toPrecision(2) + "</td><td>$" + 0.00 + "</td><td>$" + 0.00 + "</td><td>" + 0 + "</td></tr>";
     output = output + "</tbody></table></div>";
     //access the inner html of the div and place the result string in there
     document.querySelector("#outputDiv").innerHTML = output;
