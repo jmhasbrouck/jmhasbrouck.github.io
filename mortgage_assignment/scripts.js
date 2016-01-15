@@ -96,19 +96,20 @@ function createScheduleTable(event){
     for (i = 0; i < months + months/12; i++){
         if (i%12 == 0){
             array.push("<tr><td>" + "<h4>"+(date.getFullYear() + Math.floor(i/12))+"</h4>" + "</td></tr>");
+            counter++;
         }
-        else{
-            this_month = thisMonthsPayment(principal, months, monthly);
-            this_interest = principal * monthly;
-            amt_paid = this_month + this_interest + amt_paid;
-            this_principal = this_month - this_interest;
-            principal-=this_month;
-            array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(Math.round(this_principal)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(this_interest)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(amt_paid)).toFixed(2) + "</td><td>$" + parseFloat(Math.round(principal)).toFixed(2) + "</td><td>" + parseFloat(Math.round((amt_paid/principal))).toFixed(2) + "</td></tr>");
-        }
+
+        this_month = thisMonthsPayment(principal, months, monthly);
+        this_interest = principal * monthly;
+        amt_paid = this_month + amt_paid + this_interest;
+        this_principal = this_month - this_interest;
+        principal-=this_month;
+        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(this_principal).toPrecision(2) + "</td><td>$" + parseFloat(this_interest).toPrecision(2) + "</td><td>$" + parseFloat(amt_paid).toPrecision(2) + "</td><td>$" + parseFloat(principal).toPrecision(2) + "</td><td>" + parseFloat(amt_paid/principal).toPrecision(4) + "</td></tr>");
+        
     }
-    var years_in_between = Math.floor((ending_month-starting_month)/12);
-    var years_before = Math.floor((starting_month/12));
-    for(i = starting_month + years_before; i < ending_month + years_in_between; i++){
+    var years_in_between = (ending_month-starting_month)/12 + 1;
+    var years_before = (starting_month/12);
+    for(i = starting_month + years_before; i <= ending_month + years_in_between; i++){
         output = output + array[i];
     }
     output = output + "</div></tbody></table></div>";
