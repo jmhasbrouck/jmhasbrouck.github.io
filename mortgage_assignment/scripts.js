@@ -93,19 +93,17 @@ function createScheduleTable(event){
     var this_interest = 0;
     var this_principal = 0;
     var counter = 0;
+    this_month = thisMonthsPayment(principal, months, monthly);
     for (i = 0; i < months + months/12; i++){
         if (i%12 == 0){
             array.push("<tr><td>" + "<h4>"+(date.getFullYear() + Math.floor(i/12))+"</h4>" + "</td></tr>");
             counter++;
         }
-
-        this_month = thisMonthsPayment(principal, months, monthly);
+        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(this_principal).toFixed(2) + "</td><td>$" + parseFloat(this_interest).toFixed(2) + "</td><td>$" + parseFloat(amt_paid).toFixed(2) + "</td><td>$" + parseFloat(principal).toFixed(2) + "</td><td>" + parseFloat(amt_paid/initial_principal).toFixed(4) + "</td></tr>");
         this_interest = principal * monthly;
         amt_paid = this_month + amt_paid + this_interest;
         this_principal = this_month - this_interest;
-        principal=principal - (this_month + this_interest);
-        array.push("<tr><td>" + month[i % 12] + "</td><td>$" + parseFloat(this_principal).toFixed(2) + "</td><td>$" + parseFloat(this_interest).toFixed(2) + "</td><td>$" + parseFloat(amt_paid).toFixed(2) + "</td><td>$" + parseFloat(principal).toFixed(2) + "</td><td>" + parseFloat(amt_paid/principal).toFixed(4) + "</td></tr>");
-        
+        principal = principal + this_interest - (this_month);
     }
     var years_in_between = (ending_month-starting_month)/12 + 1;
     var years_before = (starting_month/12);
