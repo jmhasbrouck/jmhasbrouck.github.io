@@ -1,5 +1,6 @@
 var myDataRef = new Firebase('https://jhasbrouckwdevp1.firebaseio.com/');
 var my_text = 0;
+var my_name = "";
 //*****************************
 var animal = function(name, url, accompany_paragraph){
     this.name = name;
@@ -21,6 +22,7 @@ myDataRef.onAuth(function(authData) {
                 var animal = 0;
                 my_child.once("value", function(data){
                     animal = data.val().animal;
+                    my_name = data.val().name;
                     //**********
                     changeDOM(animal);//we don't want to change our dom until we know for sure that we have an animal to choose
                     //**********
@@ -40,6 +42,29 @@ function changeDOM(my_animal){
     output = output + "<img src = \"" + possibilites[my_animal].url + "\"/><br>";
     output = output + "<p>" + possibilites[my_animal].paragraph + "</p><br>";
     var output_div = document.querySelector("#output_div");
+    var my_child = myDataRef.child("users");
+    var matched_names = [];
+    my_child.orderByValue().on("value", function(snapshot){
+        snapshot.forEach(function(data){
+            if (data.val().animal == my_animal){
+                matched_names.push(data.val().name);
+            }
+            
+        });
+        if(matched_names.length != 0){
+        output = output + "<p>People that share your spirit animal:</p>";
+        for (i = 0; i< matched_names.length;i++){
+            if (matched_names[i] != my_name){
+            output = output + "<p>" + matched_names[i] + "</p>";
+            }
+        } 
+    } 
+    else{
+        output=output +"<p>No one else has your spirit animal...</p>";
+    }
+        output_div.innerHTML = output;
+    });
+    
     output_div.innerHTML = output;
 }
 
