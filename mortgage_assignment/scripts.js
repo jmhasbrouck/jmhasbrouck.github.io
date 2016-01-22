@@ -83,7 +83,7 @@ var parseMonths = function(){
     return true;
 }
 function createScheduleTable(event){
-    var output= "<div class=\"container\"><table class=\"table table-bordered\"><thead><tr><th>Month</th><th>Monthly Principal Paid</th><th>Monthly Interest Paid</th><th>Amount Paid</th><th>Principal Remaining</th><th>Amount Paid / Principal</th></tr></thead><tbody><div class=\"container\">";
+    var output= "<div class=\"container\"><table class=\"table table-bordered\"><thead><tr><th>Month</th><th>Monthly Principal Paid</th><th>Monthly Interest Paid</th><th>Amount Paid</th><th>Principal Remaining</th><th>Amount Paid / Principal</th></tr></thead><tbody><div class=\"container\" id = \"table\">";
     if(!parseMonths()){
         return;
     }

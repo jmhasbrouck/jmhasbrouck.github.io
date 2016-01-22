@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personality Form</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/personality_stylesheet.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+        </script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    </head>
+    <body>
+        <div class ="container">
+        <div class="jumbotron">
+            <h1>Fill out the personality form</h1>
+        </div>
+        
+        <div class = "panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <label for="email">Enter your email:</label>
+                <input type="text" class="form-control" id="email">
+                    <br>
+                <label for="password">Create your password:</label>
+                <input type="text" class="form-control" id="password">
+                <br>
+                <label for="mof">Are you a Male or Female?</label>
+                    <div id="mof"><label class="radio-inline">
+                        <input type="radio" name="m_o_f">Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="m_o_f">Female
+                    </label>
+                    </div>
+                    <br>
+            <label for="question1">You're out to dinner with your friends when someone says something awkward, which best describes you?</label>
+                    <div id="question1">
+                    <div class="radio"><label>
+                        <input type="radio" name="q1radio">Wait the silence out, it will pass shortly
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q1radio">Tell them to stop being such a buzzkill, were trying to have fun here
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q1radio">Leave, you don't have to take that kind of humiliation
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q1radio">Flip the table, you need to assert your dominance
+                        </label></div>
+                    </div>
+                    <br>
+            <label for="blood_type">What is your blood type?</label>
+                <div id="blood_type">
+                    <label class="radio-inline">
+                        <input type="radio" name="b_type">A
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="b_type">B
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="b_type">AB
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="b_type">O
+                    </label>
+                </div>
+                <br>
+            
+            <label for="ssn">Please enter your social security number:</label>
+            <div id="ssn_div"><input type="text" class="form-control" id="ssn">
+            </div>
+                <br>
+                    
+            <label for="question2">Do others seek your advice?</label>
+                    <div id="question2">
+                    <div class="radio"><label>
+                        <input type="radio" name="q2radio">Yes, for practical matters
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q2radio">Yes, for emotional matters
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q2radio">Yes, for your well known fortune teller abilities
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="q2radio">No, because your advice is the reason they're not allowed in Wendy's anymore
+                        </label></div>
+                    </div>
+                    <br>
+                    
+            <label for="drivers_license">What is your drivers liscense number?</label>
+            <div id="DL_div"><input type="text" class="form-control" id="drivers_license"></div>
+                <br>
+            <label for="integration"> Integrate x<sup>3</sup> from 0 to 300:</label>
+                    <div id="integration_div"><input type="text" class="form-control" id="integration"></div>
+                    <br>
+            <label for="birthday">When is your birthday?</label>
+            <input type="date" class="form-control" id="birthday">
+                <br>
+            <label for="question3">What kind of music is your favorite?</label>
+                    <div id="question3">
+                    <div class="radio"><label>
+                        <input type="radio" name="music_radio">Rock/Metal
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="music_radio">Rap
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="music_radio">Country
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="music_radio">I don't really listen to music anymore, too mainstream
+                        </label></div>
+                    </div>
+                    <br>
+            
+            <label for="birth_city">What city were you born in?</label>
+            <input type="text" class="form-control" id="birth_city">
+                <br>
+                
+            <label for="question4">How many times a day do you pee?</label>
+                    <div id="question3">
+                    <div class="radio"><label>
+                        <input type="radio" name="optradio">0
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="optradio">1-4
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="optradio">5-8
+                        </label></div>
+                    <div class="radio"><label>
+                        <input type="radio" name="optradio">8+
+                        </label></div>
+                    </div>
+                    <br>
+            <button type="button" id="submit_button" class="btn btn-primary">
+                                                <!-- a glyphicon is a scalable pic that can be used in controls. 
+							always create an empty span with the glyphicon class and the desired pic (http://glyphicons.com/) -->
+                                                <span class="glyphicons glyphicons-temperature-low">
+							Submit!</span>
+						
+            </button>
+                </div>
+            </div>
+            </div></div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </body>
+    <script src="js/form_saver.js"></script>
+</html>
