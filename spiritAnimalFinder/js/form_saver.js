@@ -93,7 +93,6 @@ function login(your_number){
       } else {
         console.log("Authenticated successfully with payload:", authData);
         remember: "sessiononly";
-        
         ref.child("users").child(authData.uid).set({
                 animal:your_number,
                 name: document.querySelector("#name").value

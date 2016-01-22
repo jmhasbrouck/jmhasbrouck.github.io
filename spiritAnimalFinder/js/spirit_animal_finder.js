@@ -44,7 +44,7 @@ function changeDOM(my_animal){
     var output_div = document.querySelector("#output_div");
     var my_child = myDataRef.child("users");
     var matched_names = [];
-    my_child.orderByValue().on("value", function(snapshot){
+    my_child.orderByValue().once("value", function(snapshot){
         snapshot.forEach(function(data){
             if (data.val().animal == my_animal){
                 matched_names.push(data.val().name);
