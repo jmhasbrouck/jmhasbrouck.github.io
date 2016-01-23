@@ -87,6 +87,10 @@ function createScheduleTable(event){
     if(!parseMonths()){
         return;
     }
+    principal=initial_principal;
+    principal = Number(principal);
+    monthly=initial_monthly_percent/(12*100);
+    monthly = Number(monthly);
     var amt_paid = 0;
     var array = [];
     var this_month = 0;
@@ -105,10 +109,15 @@ function createScheduleTable(event){
         this_principal = this_month - this_interest;
         principal = principal + this_interest - (this_month);
     }
-    var years_in_between = (ending_month-starting_month)/12 + 1;
-    var years_before = (starting_month/12);
-    for(i = starting_month + years_before; i <= ending_month + years_in_between; i++){
+    
+    //var years_in_between = (ending_month-starting_month)/12 + 1;
+    var years_before = Math.floor(starting_month/12) + 1;
+    var extention = 0;
+    for(i = starting_month + years_before; i <= ending_month + extention + years_before; i++){
         output = output + array[i];
+        if (array[i].charAt(8) == '<' && array[i].charAt(9) == 'h'){
+            extention++;
+        }
     }
     output = output + "</div></tbody></table></div>";
     document.querySelector("#outputDiv3").innerHTML = output;
