@@ -20,7 +20,7 @@ myDataRef.onAuth(function(authData) {
             if (authData) {
                 var my_child = myDataRef.child("users").child(authData.uid);
                 var animal = 0;
-                my_child.once("value", function(data){
+                my_child.on("value", function(data){
                     animal = data.val().animal;
                     my_name = data.val().name;
                     //**********
