@@ -103,7 +103,7 @@
           console.log("/partials/profile_images/p" + (animal + 1) + ".jpg");
            $scope.spirit_name = spirit_names_array[animal];
            $scope.spirit_description= spirit_descriptions_array[animal];
-          return "/partials/profile_images/p" + (animal + 1) + ".jpg";
+          return "spiritAnimalFinderV2/partials/profile_images/p" + (animal + 1) + ".jpg";
         
        }
        
@@ -121,14 +121,14 @@
                     return path;
                 }
                 else{
-                    return "spiritAnimalFinderV2/partials/images/array" + image_num + ".gif";
+                    return "partials/images/array" + image_num + ".gif";
                 }
             
         }
     
         $scope.getOpSRC = function(number){
             //var path = "partials/images/op" + number + "/num" + image_num + ".gif";
-            return "spiritAnimalFinderV2/partials/images/op" + number + "/num" + image_num + ".png"
+            return "partials/images/op" + number + "/num" + image_num + ".png"
             if (doesFileExist(path)){
                     return path;
                 }
