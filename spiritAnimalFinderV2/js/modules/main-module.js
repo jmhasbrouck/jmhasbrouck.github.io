@@ -7,16 +7,16 @@
     var animal = 0;
     app.config(function($routeProvider){
         $routeProvider.when('/', {
-            templateUrl: '../../partials/index.html', controller:'mainCtrl'
+            templateUrl: 'partials/index.html', controller:'mainCtrl'
         })
         .when('/login', {
-            templateUrl: '../../partials/newUser.html', controller:'newUser'
+            templateUrl: 'partials/newUser.html', controller:'newUser'
         })
         .when('/quiz',{
-            templateUrl: '../../partials/quiz.html', controller:'quiz'
+            templateUrl: 'partials/quiz.html', controller:'quiz'
         })
         .when('/profile', {
-            templateUrl: '../../partials/profile.html', controller:'profile'
+            templateUrl: 'partials/profile.html', controller:'profile'
         })
         .otherwise({
             redirectTo:'/'
