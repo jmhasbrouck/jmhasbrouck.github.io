@@ -121,14 +121,14 @@
                     return path;
                 }
                 else{
-                    return "partials/images/array" + image_num + ".gif";
+                    return "spiritAnimalFinderV2/partials/images/array" + image_num + ".gif";
                 }
             
         }
     
         $scope.getOpSRC = function(number){
             //var path = "partials/images/op" + number + "/num" + image_num + ".gif";
-            return "partials/images/op" + number + "/num" + image_num + ".png"
+            return "spiritAnimalFinderV2/partials/images/op" + number + "/num" + image_num + ".png"
             if (doesFileExist(path)){
                     return path;
                 }
