@@ -1,12 +1,40 @@
-<style type="text/css" src="css/header_stylesheet.css"></style>
-<div id="whole_header">
-  <div>
-    This part of the header is always here
-  </div>
-  <div ng-if="user">
-    User  is logged in :D
-  </div>
-  <div ng-if="!user">
-    <!--user input or facebook ect options-->
-  </div>
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Find Your Spirit Animal Soulmate</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data='data'>
+      
+      <form class="navbar-form navbar-left" role="new_user" ng-if="!user">
+        <button type="submit" class="btn btn-default" ng-click="login_click()">Login</button>
+        <span ng-if="log_in">
+        <form class="navbar-form navbar-left" >
+            
+            <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" id="email"/>
+            <input type="password" class="form-control" name="password" placeholder="Password" required="" id="password"/>
+            <button type="submit" class="btn btn-default" ng-click="login_()">Submit!</button>
+        </form></span>
+        
+      </form>
+      <form class="navbar-form navbar-right" role="new_user" ng-if="!user">
+        <button type="submit" class="btn btn-default" ng-click="new_user()">New User</button>  
+      </form>
+        <form class="navbar-form navbar-right" role="new_user" ng-if="user">
+        <button type="submit" class="btn btn-default" ng-click="log_out()">Log out</button>  
+      </form>
+        
+      <div ng-if="user">
+          
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,39 @@
+<div class = "panel-group" ng-controller="accountCreation">
+            <div class="panel panel-default" style="background-color: rgba(255,255,255,.6)">
+                <!--I wanted to have facebook and google authentification :'(
+                <input type="image" id="image" src="partials/images/facebook-icon.png" ng-click="submit_facebook()"/>
+                <input type="image" id="image" src="partials/images/google-g-logo.png" ng-click="submit_google()"/>
+                <input type="image" id="image" src="partials/images/email-logo.png" ng-click="on=true"/>-->
+                <div class="panel-body">
+                    <div class="container">
+                        
+                            
+                        <img src="{{getImageSRC()}}" id="big_image" class="center-block"/>
+                            
+                        
+                        <h1>How does this make you feel? (click the images)</h1>
+                        <div class="row">
+                            <div class="col-md-3"><input type="image" id="image" src="{{getOpSRC(1)}}" ng-click="op(1)"/></div>
+                            <div class="col-md-3"><input type="image" id="image" src="{{getOpSRC(2)}}" ng-click="op(2)"/></div>
+                            <div class="col-md-3"><input type="image" id="image" src="{{getOpSRC(3)}}" ng-click="op(3)"/></div>
+                            <div class="col-md-3"><input type="image" id="image" src="{{getOpSRC(4)}}" ng-click="op(4)"/></div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>
+<style>
+    .center-block{
+        height:300px;
+        width:400px;
+    }
+    #image{
+        height: 140px;
+        width: 140px;
+    }
+    h1{
+        font-family:serif;
+        text-align: center;
+        color: black;
+    }
+</style>
