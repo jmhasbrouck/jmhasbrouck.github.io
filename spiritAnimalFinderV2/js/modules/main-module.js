@@ -28,7 +28,7 @@
         return{
         restrict: 'E', 
         replace: true,
-        templateUrl: '../html_directives/header.html',
+        templateUrl: 'html_directives/header.html',
         controller: ['$scope', '$filter','$location' ,function ($scope, $filter, $location, $element) {
             var authData = myDataRef.getAuth();
             if(authData){
