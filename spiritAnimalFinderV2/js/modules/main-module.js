@@ -103,7 +103,7 @@
           console.log("/partials/profile_images/p" + (animal + 1) + ".jpg");
            $scope.spirit_name = spirit_names_array[animal];
            $scope.spirit_description= spirit_descriptions_array[animal];
-          return "spiritAnimalFinderV2/partials/profile_images/p" + (animal + 1) + ".jpg";
+          return "partials/profile_images/p" + (animal + 1) + ".jpg";
         
        }
        
