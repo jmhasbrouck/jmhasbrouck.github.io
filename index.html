@@ -11,7 +11,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-3">
-                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/10896921_10203449729264549_4946665204217589632_n.jpg"           alt="Swim" id="my_headshot"/>
+                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/10896921_10203449729264549_4946665204217589632_n.jpg"           alt="Swim" class = "img-responsive" id="my_headshot"/>
                 </a>
             </div>
             <div class="col-sm-6">
@@ -20,7 +20,7 @@
                 <p>Programmer, Swimmer, Musician, Student</p>
             </div>
         <div class="col-sm-3">
-                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/12314637_1143648788998256_9217833439002951231_o.jpg"           alt="Swim" id="swim"/>
+                <a href="http://athletics.carthage.edu/index.aspx?path=mswim&" target = "_blank"><img                        src="images/12314637_1143648788998256_9217833439002951231_o.jpg" class = "img-responsive"          alt="Swim" id="swim"/>
                 </a>
             </div>
         </div>
@@ -47,9 +47,51 @@
           <div id="coder" class="tab-pane fade in active">
               <a href="https://github.com/jmhasbrouck" target = "_blank"><h1>My GitHub Repository</h1></a>
               <br>
+              <h1>Videos of my projects that have interesting graphical compenents!</h1>
+              
+              
+              <div style="text-align: center">
+              <video id="video1" width="800">
+                <source src="videos/graphics_class.mp4" type="video/mp4">
+              
+                Your browser does not support HTML5 video.
+              </video>
+              
+              <br>
+                  <img onClick = "playPause1()" src="images/Playbutton.png" style=" height:50px; width:50px;" /> 
+              <br>
+              <br>
+              <video id="video2" width="800">
+                <source src="videos/game_of_life.mp4" type="video/mp4">
+
+                Your browser does not support HTML5 video.
+              </video>
+              <br>
+              <img onClick = "playPause2()" src="images/Playbutton.png" style=" height:50px; width:50px;" /> 
+              </div>
+              
+              <script>
+                  //I dont think that anyone will ever actually look at this code, but if you are... im sorry this is quick and dirty
+                  var myVideo = document.getElementById("video1"); 
+                  var myVideo2= document.getElementById("video2");
+                function playPause1() { 
+                    if (myVideo.paused) 
+                        myVideo.play(); 
+                    else 
+                        myVideo.pause(); 
+                } 
+                  function playPause2() { 
+                    if (myVideo2.paused) 
+                        myVideo2.play(); 
+                    else 
+                        myVideo2.pause(); 
+                } 
+              </script>
+              <p style = "text-align: center">The videos are not of great quality because running the screen capture and graphics programs take up a lot of resources!</p>
+              <br>
               <h1>Websites from the Web Development Course:</h1>
               <ul>
-                  <li><a href ="http://jmhasbrouck.github.io/spiritAnimalFinder/" target = "_blank">Find your Spirit animal</a></li><br><p>A website that finds your spirit animal and matches you with local singles based on that spirit animal. Uses bootstrap and FireBase</p>
+                  <li><a href ="http://jmhasbrouck.github.io/spiritAnimalFinder/" target = "_blank">Find your Spirit animal</a></li><br><p>A website that finds your spirit animal and matches you with local singles based on that spirit animal. I Used bootstrap and FireBase</p>
                   <li><a href ="http://jmhasbrouck.github.io/spiritAnimalFinderV2/" target = "_blank">Find your Spirit animal 2.0</a></li><br><p>Used Angular JS to make my previous project into a single page application</p>
               <li><a href ="http://jmhasbrouck.github.io/Resume_Assignment/MMResume.html" target = "_blank"/>Resume made for my Professor</a></li><br><p>This is my first website. The assignment was to create a resume for our professor</p>
             <li><a href ="http://jmhasbrouck.github.io/mortgage_assignment/" target = "_blank"/>Mortgage Calculator</a></li><br><p>This was a project to create a mortgage calculator using JavaScript</p>
