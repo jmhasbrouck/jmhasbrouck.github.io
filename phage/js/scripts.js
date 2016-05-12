@@ -116,7 +116,7 @@ $(document).ready(function () {
             if (prev_start > start) {
                 gap = (prev_start - start + 1) + "bp overlap with previous gene"
             } else {
-                gap = (start -prev_start - 1) + "bp gap with previous gene";
+                gap = (start - prev_start - 1) + "bp gap with previous gene";
             }
         }
         total = total + "Gap: " + gap + " ";
@@ -167,6 +167,6 @@ $(document).ready(function () {
         console.log(fs);
         total = total + "F: " + func + " ";
         total = total + "FS: " + fs;
-        alert(total);
+        document.getElementById("output-div").innerHTML = "<p>" + total + "</p>";
     });
 });
