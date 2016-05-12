@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+
+<head>
+    <title>A Phage Hunter's Annotation Helper</title>
+    <!--Include jQuery and Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    
+    <!-- my stuff -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/scripts.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>A Phage Hunter's Annotation Helper</h1></div>
+            </div>
+        </div>
+        <div class="panel">
+            <form>
+                <div class = "row">
+                    <div class = "col-md-2">
+                    </div>
+                    <div class = "col-md-3">
+                        <a href="http://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE=Proteins" target="_blank"><input  class="form-control" type="button" value="BLASTp"  ></a>
+                    </div>
+                    <div class = "col-md-2">
+                    </div>
+                    <div class = "col-md-3">
+                        <a href="http://toolkit.tuebingen.mpg.de/hhpred" target="_blank"><input  class="form-control" type="button" value="HHPred"  ></a>
+                    </div>
+                    <div class = "col-md-2">
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div class="form-group">
+                    <div class="form-inline"> <!-- start stop -->
+                        <div class="row">
+                            <label class="col-sm-1 control-label vcenter">Start Stop Codon</label>
+                            <div class="col-sm-3"><div class="input-group vcenter">
+                                <span class="input-group-addon"  >Previous Stop</span>
+                                <input type="number" class="form-control" id="previous-start" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon"  >Start</span>
+                                <input type="number" class="form-control" id="start" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-4"><div class="input-group">
+                                <span class="input-group-addon"  >Stop</span>
+                                <input type="number" class="form-control" id="stop" placeholder="0">
+                            </div></div>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br> <!-- coding potential -->
+                    <div class="row"> 
+                        <label class="col-sm-1 control-label vcenter">Coding Potential</label>
+                        <div class="col-sm-10 selectContainer">
+                            <select name="cp-select" class="form-control"
+                                    id="cp-selected">
+                                <option>ORF includes all coding potential on GeneMark -SMEG and -TB outputs</option>
+                                <option>ORF includes coding potential on GeneMark -SMEG but not -TB outputs</option>
+                                <option>ORF includes coding potential on GeneMark -TB but not -SMEG outputs</option>
+                                <option>ORF does not include coding potential on GeneMark -SMEG or -TB outputs</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br> <!-- scores -->
+                    <div class="form-inline">
+                        <div class="row">
+                            <label class="col-sm-1 control-label vcenter">Scores</label>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon"  >Z-Value</span>
+                                <input type="number" step="0.001" class="form-control" id="z-value" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon"  >Final Score</span>
+                                <input type="number" step="0.001" class="form-control" id="final-score" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-2">
+                                <label for="best-score">Is this the best score?</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <input id = "bs-yes" type="radio" 
+                                           name="bs-yes-no" value="yes" checked>Yes</label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="bs-no" name="bs-yes-no" value="no">No</label>
+                            </div>
+                        </div>
+                        <div id="show-this-if-bs-no" hidden>
+                            <br>
+                            <div class="row">
+                                <label class="col-sm-2 control-label">Select why the best score was not chosen</label>
+                                <div class="col-sm-5 selectContainer">
+                                    <select name="bestscore-select" class="form-control"
+                                            id="bs-select">
+                                        <optgroup label="This start...">
+                                            <option>included all coding potential where other starts cut off coding potential</option>
+                                            <option>has a 1 to 1 alignment where starts with a better score do not</option>
+                                            <option>had the Longest ORF</option>
+                                            <option>created a preferred 4bp overlap</option>
+                                            <option>created a preferred 1bp overlap</option>
+                                        </optgroup>
+                                        <optgroup label="----------">
+                                            <option>I would like to write my own reason</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class= "col-md-5" id = "show-bs-reason" hidden>
+                                <textarea rows="2" class="form-control" id="bs-reason" placeholder="Write your reason here"></textarea>
+                                    </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br> <!-- start choice source-->
+                    
+                        <div class="row">
+                            <label class="col-sm-1 control-label">Start Choice Source</label>
+                            <div class="col-sm-10 selectContainer">
+                                <select name="scs-select" class="form-control" id="scs-selected">
+                                    <option>Agrees with Glimmer and GeneMark predicitions</option>
+                                    <option>Agrees with Glimmer but not GeneMark predicitions</option>
+                                    <option>Agrees with GeneMark but not Glimmer predictions</option>
+                                    <option>Does not agree with Glimmer or GeneMark predicitons</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- BLAST -->
+                    <div class="form-inline">
+                        <div class="row">
+                            <label class="col-sm-1 control-label">BLAST</label>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon"  >Aligned-Gene</span>
+                                <input type="text" class="form-control" id="blast-gene-name" placeholder="...">
+                            </div></div>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon">From Phage</span>
+                                <input type="text" class="form-control" id="blast-phage-name" placeholder="...">
+                            </div></div>
+                            <div class="col-sm-2"><div class="input-group">
+                                <span class="input-group-addon">Query AA#</span>
+                                <input type="number" step="0.001" class="form-control" id="your-AA-alignment" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-2"><div class="input-group">
+                                <span class="input-group-addon">Aligned AA#</span>
+                                <input type="number" step="0.001" class="form-control" id="other-AA-alignment" placeholder="0">
+                            </div></div>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- LO -->
+                    <!--<div class="form-inline">-->
+                        <div class="row">
+                            <label class="col-sm-1 control-label">Longest ORF</label>
+                            <div class="col-sm-3"><div class="input-group">
+                                <span class="input-group-addon"  >ORF Length</span>
+                                <input type="number" step="0.001" class="form-control" id="orf-length" placeholder="0">
+                            </div></div>
+                            <div class="col-sm-2">
+                                <label for="best-score">Longest Possible ORF?</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline" for="lo-yes">
+                                    <input type="radio" id = "lo-yes" name="lo-yes-no" value="yes" checked>Yes</label>
+                                <label class="radio-inline" for="lo-no">
+                                    <input type="radio" id = "lo-no" name="lo-yes-no" value="no" >No</label>
+                            </div>
+                        </div>
+                        <div id = "show-this-if-lo-no" class="row" hidden>
+                            <br>
+                            <label class="col-sm-2 control-label">Select why a longer ORF was not chosen</label>
+                            <div class="col-sm-5 selectContainer">
+                                <select name="lo-select" class="form-control"
+                                        id="lo-select">
+                                    <optgroup label="This ORF...">
+                                        <option selected>included all coding potential where Longer ORFs cut off coding potential</option>
+                                        <option>has a 1 to 1 alignment where starts with a longer ORF do not</option>
+                                        <option>created a preferred 4bp overlap</option>
+                                        <option>created a preferred 1bp overlap</option>
+                                        <option>created better scores</option>
+                                    </optgroup>
+                                    <optgroup label="----------">
+                                        <option>I would like to write my own reason</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div id = "show-lo-reason" class="row" hidden>
+                            <div class="col-sm-5"><div class="input-group" >
+                                <textarea rows="2" class="form-control" id="lo-reason"
+                                          placeholder="Write your reason here"></textarea>
+                            </div></div></div>
+                        </div>
+                    <!--</div>-->
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- Function -->
+                    <div class="form-inline">
+                        <div class ="row">
+                            <label class="col-sm-1 control-label vcenter">Function</label>
+                            <div class="col-sm-2">
+                                <label for="best-score">Is the Function known?</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="nkf-yes-no" id="nkf-yes">Yes</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="nkf-yes-no" id="nkf-no" checked>No</label>
+                            </div>
+                            <!--<div id = "show-this-if-nkf-no">
+                                <div class="col-sm-3"><div class="input-group">
+                                    <span class="input-group-addon">Top E-value</span>
+                                    <input type="number" step="0.001" class="form-control" id="blastp-e" placeholder="BLASTp">
+                                </div></div>
+                                <div class="col-sm-3"><div class="input-group">
+                                    <span class="input-group-addon">Top %</span>
+                                    <input type="number" step="0.001" class="form-control" id="hhpred-%" placeholder="HHPred">
+                                </div></div>
+                            </div>-->
+                        </div>
+                        <div id = "show-this-if-nkf-yes" hidden>
+                            <br>
+                            <div class = "row">
+                                <label class="col-sm-1 control-label vcenter">BLASTp</label>
+                                <div class="col-sm-3"><div class="input-group">
+                                    <span class="input-group-addon">Function</span>
+                                    <input type="text" class="form-control" id="function" placeholder="Name">
+                                </div></div>
+                                <div class="col-sm-3"><div class="input-group">
+                                    <span class="input-group-addon">Phage</span>
+                                    <input type="text" class="form-control" id="blastp-phage" placeholder="Name">
+                                </div></div>
+                                <div class="col-sm-2"><div class="input-group">
+                                    <span class="input-group-addon">E-Value</span>
+                                    <input type="text" class="form-control" id="e-value" placeholder="e-4">
+                                </div></div>
+                                <div class="col-sm-2"><div class="input-group">
+                                    <span class="input-group-addon">% Identity</span>
+                                    <input type="number" class="form-control" id="identity" placeholder="0">
+                                </div></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                                <br>
+                                <label class="col-sm-2 control-label vcenter">HHPred probability greater than 80%?</label>
+                                <div class="col-sm-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="hhpred-yes-no" id="hhpred-yes">Yes</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="hhpred-yes-no" id="hhpred-no">No</label>
+                                </div>
+                                
+                                </div>
+                            <div id="hhpred-div-yes" hidden>
+                                <br>
+                                    <div class = "row">
+                                        <label class="col-sm-1 control-label vcenter">HHPred</label>
+                                    <div class="col-sm-3"><div class="input-group">
+                                        <span class="input-group-addon">Domain</span>
+                                        <input type="text" class="form-control" id="domain" placeholder="Name">
+                                    </div></div>
+                                    <div class="col-sm-3"><div class="input-group">
+                                        <span class="input-group-addon">Phage</span>
+                                        <input type="text" class="form-control" id="hhpred-phage" placeholder="Name">
+                                    </div></div>
+                                    <div class="col-sm-3"><div class="input-group">
+                                        <span class="input-group-addon">% Probability</span>
+                                        <input type="number" class="form-control" id="hhpred-probability" placeholder="0">
+                                    </div></div></div>
+                            </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- submit -->
+                    <div class="row">
+                        <div class="col-sm-5"><img src="phage.png" height="100px" width="100px" class="img-responsive"></div>
+                        <div class="col-sm-2">
+                        <input type="button" class="form-control" value="Submit" id="submit-button"/>
+                        </div>
+                        <div class="col-sm-5"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
